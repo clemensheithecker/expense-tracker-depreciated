@@ -9,6 +9,21 @@ const prisma = new PrismaClient();
 
 async function main() {
   const firstPostId = '5c03994c-fc16-47e0-bd02-d218a370a078';
+  const householdAccountId = '98e7b57e-c88b-45f0-b1f2-d583ca7a0943';
+
+  await prisma.account.upsert({
+    where: {
+      id: householdAccountId,
+    },
+    create: {
+      id: householdAccountId,
+      name: 'Household',
+      currentBalance: 0,
+      initialBalance: 0,
+    },
+    update: {},
+  });
+
   await prisma.post.upsert({
     where: {
       id: firstPostId,
