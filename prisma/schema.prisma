@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgres"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -20,4 +20,89 @@ model Post {
   // This is unique so it can be used for cursor-based pagination
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+}
+
+// To return `Date`s intact through the API we use transformers
+// https://trpc.io/docs/data-transformers
+// This is unique so it can be used for cursor-based pagination
+
+model Account {
+  id                String            @id @default(uuid())
+  name              String            @unique
+  type              AccountType?      @relation(fields: [typeId], references: [id])
+  typeId            String?
+  currentBalance    Float             @default(0)
+  initialBalance    Float             @default(0)
+  currency          Currency          @default(EUR)
+  transactions      Transaction[]
+  incomingTransfers AccountTransfer[] @relation("IncomingTransfers")
+  outgoingTransfers AccountTransfer[] @relation("OutgoingTransfers")
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @default(now()) @updatedAt
+}
+
+model AccountTransfer {
+  id            String   @id @default(uuid())
+  name          String
+  fromAccount   Account  @relation("IncomingTransfers", fields: [fromAccountId], references: [id])
+  fromAccountId String
+  toAccount     Account  @relation("OutgoingTransfers", fields: [toAccountId], references: [id])
+  toAccountId   String
+  amount        Float
+  note          String?
+  tags          String[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now()) @updatedAt
+}
+
+model AccountType {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  accounts Account[]
+}
+
+model PaymentMethod {
+  id           String            @id @default(uuid())
+  name         String            @unique
+  type         PaymentMethodType
+  transactions Transaction[]
+}
+
+model Transaction {
+  id              String               @id @default(uuid())
+  account         Account              @relation(fields: [accountId], references: [id])
+  accountId       String
+  name            String
+  amount          Float
+  category        TransactionCategory? @relation(fields: [categoryId], references: [id])
+  categoryId      String?
+  involvedParty   String
+  timestamp       DateTime
+  paymentMethod   PaymentMethod?       @relation(fields: [paymentMethodId], references: [id])
+  paymentMethodId String?
+  note            String?
+  tags            String[]
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @default(now()) @updatedAt
+}
+
+model TransactionCategory {
+  id           String                @id @default(uuid())
+  name         String
+  parentId     String?
+  parent       TransactionCategory?  @relation("TransactionCategoryToTransactionCategory", fields: [parentId], references: [id])
+  children     TransactionCategory[] @relation("TransactionCategoryToTransactionCategory")
+  transactions Transaction[]
+}
+
+enum Currency {
+  EUR
+  USD
+  GBP
+}
+
+enum PaymentMethodType {
+  NEUTRAL
+  INCOME
+  EXPENSE
 }
