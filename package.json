@@ -11,7 +11,7 @@
     "prisma-studio-postgres": "prisma studio",
     "db-seed": "prisma db seed",
     "db-reset": "prisma migrate reset",
-    "dx:next": "run-s migrate-sqlite generate-sqlite db-seed && next dev",
+    "dx:next": "run-s migrate-postgres generate-postgres db-seed && next dev",
     "dx:prisma-studio": "pnpm prisma-studio-sqlite",
     "dx": "run-p dx:* --print-label",
     "dev": "pnpm dx:next",
