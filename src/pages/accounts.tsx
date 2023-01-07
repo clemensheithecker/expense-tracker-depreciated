@@ -8,8 +8,6 @@ import type { AppRouter } from '~/server/routers/_app';
 const AccountsPage: NextPageWithLayout = () => {
   const accountsQuery = trpc.account.list.useQuery();
 
-  console.log({ accountsQuery });
-
   return (
     <>
       <h1>Accounts</h1>
