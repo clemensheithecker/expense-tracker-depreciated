@@ -25,6 +25,7 @@ const TransactionsPage: NextPageWithLayout = () => {
               amount={transaction.amount}
               category={{ name: transaction.category?.name }}
               timestamp={transaction.timestamp}
+              currency={transaction.account.currency}
             />
           </li>
         ))}
