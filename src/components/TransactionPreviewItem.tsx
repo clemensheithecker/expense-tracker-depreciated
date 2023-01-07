@@ -16,12 +16,16 @@ const TransactionPreviewItem = (props: {
         <div>
           <h2 className="font-medium text-gray-900">{name}</h2>
           <p className="mt-1 text-xs text-gray-500">
-            {timestamp.toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            })}
-            {category.name !== undefined ? ' • ' + category.name : ''}
+            <span>
+              {timestamp.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </span>
+            {category.name !== undefined && (
+              <span className="ml-2">{category.name}</span>
+            )}
           </p>
         </div>
         <p
