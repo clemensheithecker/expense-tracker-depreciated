@@ -11,7 +11,7 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>{children}</main>
+      <main className="mx-auto max-w-screen-lg p-4">{children}</main>
     </>
   );
 };
