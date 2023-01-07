@@ -11,12 +11,11 @@ const TransactionsPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <h1>Transactions</h1>
-      <p>A list of all transactions.</p>
+      <h1 className="mt-6 text-3xl font-bold text-gray-900">Transactions</h1>
 
       {transactionsQuery.status === 'loading' && '(loading)'}
 
-      <ul>
+      <ul className="mt-6 overflow-hidden rounded-lg border">
         {transactionsQuery.data?.map((transaction) => (
           <li key={transaction.id}>
             <TransactionPreviewItem
