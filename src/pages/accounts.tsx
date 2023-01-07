@@ -3,6 +3,7 @@ import { NextPageWithLayout } from './_app';
 import { inferProcedureInput } from '@trpc/server';
 import Link from 'next/link';
 import { Fragment } from 'react';
+import AccountPreviewItem from '~/components/AccountPreviewItem';
 import type { AppRouter } from '~/server/routers/_app';
 
 const AccountsPage: NextPageWithLayout = () => {
@@ -10,15 +11,22 @@ const AccountsPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <h1>Accounts</h1>
-      <p>A list of all accounts.</p>
+      <h1 className="mt-6 text-3xl font-bold text-gray-900">Accounts</h1>
 
       {accountsQuery.status === 'loading' && '(loading)'}
 
-      <ul>
+      <ul className="mt-6 overflow-hidden rounded-lg border">
         {accountsQuery.data?.map((account) => (
           <li key={account.id}>
-            <article>
+            <AccountPreviewItem
+              id={account.id}
+              name={account.name}
+              type={{ name: account.type?.name }}
+              currentBalance={account.currentBalance}
+              currency={account.currency}
+              totalTransactions={account.totalTransactions}
+            />
+            {/* <article>
               <h2>{account.name}</h2>
               <dl>
                 <dt>Type: </dt>
@@ -38,7 +46,7 @@ const AccountsPage: NextPageWithLayout = () => {
                 <dd>{account.totalTransactions}</dd>
               </dl>
               <Link href={`/account/${account.id}`}>Account page</Link>
-            </article>
+            </article> */}
           </li>
         ))}
       </ul>
