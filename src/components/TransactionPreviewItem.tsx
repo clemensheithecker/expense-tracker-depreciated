@@ -40,6 +40,7 @@ const TransactionPreviewItem = (props: {
           {amount.toLocaleString('en-US', {
             style: 'currency',
             currency,
+            signDisplay: 'exceptZero',
           })}
         </p>
       </article>
