@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { NextPageWithLayout } from '../_app';
 import Link from 'next/link';
 import { RouterOutput, trpc } from '~/utils/trpc';
+import TransactionPreviewItem from '~/components/TransactionPreviewItem';
 
 type AccountByIdOutput = RouterOutput['account']['byId'];
 type TransactionByAccountIdOutput = RouterOutput['transaction']['byAccountId'];
@@ -13,31 +14,21 @@ const TransactionPreviewItems = (props: {
   const { transactions } = props;
 
   return (
-    <>
+    <ul>
       {transactions &&
         transactions.map((transaction) => (
-          <article key={transaction.id}>
-            <h2>{transaction.name}</h2>
-            <dl>
-              <dt>Amount: </dt>
-              <dd>{transaction.amount}</dd>
-            </dl>
-            <dl>
-              <dt>Category: </dt>
-              <dd>{transaction.category?.name || 'NaN'}</dd>
-            </dl>
-            <dl>
-              <dt>Timestamp: </dt>
-              <dd>{transaction.timestamp.toLocaleString()}</dd>
-            </dl>
-
-            <Link href={`/transaction/${transaction?.id}`}>
-              Transaction page
-            </Link>
-          </article>
+          <li key={transaction.id}>
+            <TransactionPreviewItem
+              id={transaction.id}
+              name={transaction.name}
+              amount={transaction.amount}
+              category={{ name: transaction.category?.name }}
+              timestamp={transaction.timestamp}
+              currency={transaction.account.currency}
+            />
+          </li>
         ))}
-      ;
-    </>
+    </ul>
   );
 };
 
