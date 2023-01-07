@@ -27,18 +27,20 @@ model Post {
 // This is unique so it can be used for cursor-based pagination
 
 model Account {
-  id                String            @id @default(uuid())
-  name              String            @unique
-  type              AccountType?      @relation(fields: [typeId], references: [id])
-  typeId            String?
-  currentBalance    Float             @default(0)
-  initialBalance    Float             @default(0)
-  currency          Currency          @default(EUR)
-  transactions      Transaction[]
-  incomingTransfers AccountTransfer[] @relation("IncomingTransfers")
-  outgoingTransfers AccountTransfer[] @relation("OutgoingTransfers")
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @default(now()) @updatedAt
+  id                  String            @id @default(uuid())
+  name                String            @unique
+  type                AccountType?      @relation(fields: [typeId], references: [id])
+  typeId              String?
+  currentBalance      Float             @default(0)
+  initialBalance      Float             @default(0)
+  currency            Currency          @default(EUR)
+  transactions        Transaction[]
+  totalTransactions   Int               @default(0)
+  latestTransactionAt DateTime?
+  incomingTransfers   AccountTransfer[] @relation("IncomingTransfers")
+  outgoingTransfers   AccountTransfer[] @relation("OutgoingTransfers")
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @default(now()) @updatedAt
 }
 
 model AccountTransfer {
@@ -89,8 +91,8 @@ model Transaction {
 model TransactionCategory {
   id           String                @id @default(uuid())
   name         String
-  parentId     String?
   parent       TransactionCategory?  @relation("TransactionCategoryToTransactionCategory", fields: [parentId], references: [id])
+  parentId     String?
   children     TransactionCategory[] @relation("TransactionCategoryToTransactionCategory")
   transactions Transaction[]
 }
