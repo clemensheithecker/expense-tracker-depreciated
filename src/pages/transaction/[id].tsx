@@ -11,19 +11,18 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
 
   return (
     <>
-      <h1>{transaction.name}</h1>
-      <p>
-        <em>{`Created on ${transaction.createdAt}`}</em>
-      </p>
-      <p>
-        <em>{`Last updated on ${transaction.updatedAt}`}</em>
+      <h1 className="mt-6 text-3xl font-bold text-gray-900">
+        {transaction.name}
+      </h1>
+      <p className="mt-1 text-sm font-semibold uppercase text-gray-300">
+        Transaction
       </p>
 
-      <ul>
+      <ul className="mt-6">
         <li>
-          <dl>
-            <dt>Account: </dt>
-            <dd>
+          <dl className="sm:grid sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-500">Account</dt>
+            <dd className="mt-1 text-gray-900 sm:col-span-2 sm:mt-0">
               <Link href={`/account/${transaction.account.id}`}>
                 {transaction.account.name}
               </Link>
@@ -31,9 +30,17 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
           </dl>
         </li>
         <li>
-          <dl>
-            <dt>Amount: </dt>
-            <dd>
+          <dl className="mt-6 sm:grid sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-500">Amount</dt>
+            <dd
+              className={`mt-1 sm:col-span-2 sm:mt-0 ${
+                transaction.amount > 0
+                  ? 'text-green-500'
+                  : transaction.amount < 0
+                  ? 'text-red-500'
+                  : 'text-gray-900'
+              }`}
+            >
               {transaction.amount.toLocaleString(undefined, {
                 style: 'currency',
                 currency: transaction.account.currency,
@@ -42,51 +49,63 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
           </dl>
         </li>
         <li>
-          <dl>
-            <dt>Category: </dt>
-            <dd>{transaction.category?.name || 'NaN'}</dd>
+          <dl className="mt-6 sm:grid sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-500">Category</dt>
+            <dd className="mt-1 text-gray-900 sm:col-span-2 sm:mt-0">
+              {transaction.category?.name || 'NaN'}
+            </dd>
           </dl>
         </li>
         <li>
-          <dl>
-            <dt>
+          <dl className="mt-6 sm:grid sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-500">
               {transaction.amount > 0
                 ? 'Payee'
                 : transaction.amount < 0
                 ? 'Receiver'
-                : 'Involved Party'}
+                : 'Involved party'}
             </dt>
-            <dd>{transaction.involvedParty}</dd>
+            <dd className="mt-1 text-gray-900 sm:col-span-2 sm:mt-0">
+              {transaction.involvedParty}
+            </dd>
           </dl>
         </li>
         <li>
-          <dl>
-            <dt>Timestamp: </dt>
-            <dd>{transaction.timestamp.toString()}</dd>
+          <dl className="mt-6 sm:grid sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-500">Timestamp</dt>
+            <dd className="mt-1 text-gray-900 sm:col-span-2 sm:mt-0">
+              {transaction.timestamp.toLocaleString('en-US')}
+            </dd>
           </dl>
         </li>
         <li>
-          <dl>
-            <dt>Payment Method: </dt>
+          <dl className="mt-6 sm:grid sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-500">Payment method</dt>
             <dd>{transaction.paymentMethod?.name}</dd>
           </dl>
         </li>
         <li>
-          <dl>
-            <dt>Note: </dt>
-            <dd>{transaction.note}</dd>
+          <dl className="mt-6 sm:grid sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-500">Note</dt>
+            <dd className="mt-1 text-gray-900 sm:col-span-2 sm:mt-0">
+              {transaction.note}
+            </dd>
           </dl>
         </li>
         <li>
-          <dl>
-            <dt>Tags: </dt>
-            <dd>
+          <dl className="mt-6 sm:grid sm:grid-cols-3 sm:gap-4">
+            <dt className="font-medium text-gray-500">Tags</dt>
+            <dd className="mt-1 text-gray-900 sm:col-span-2 sm:mt-0">
               {transaction.tags.length === 0 ? (
                 'NaN'
               ) : (
-                <ul>
+                <ul className="flex">
                   {transaction.tags.map((tag, index) => (
-                    <li key={index}>{tag}</li>
+                    <li key={index} className="ml-2 first:ml-0">
+                      <span className="rounded-md bg-indigo-100 px-2 py-1">
+                        {tag}
+                      </span>
+                    </li>
                   ))}
                 </ul>
               )}
@@ -95,8 +114,23 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
         </li>
       </ul>
 
-      <h2>Raw data:</h2>
-      <pre>{JSON.stringify(transaction, null, 4)}</pre>
+      <p className="mt-8 text-xs text-gray-300">
+        {`Created on ${transaction.createdAt.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })} at ${transaction.createdAt.toLocaleTimeString('en-US')}`}
+      </p>
+      <p className="text-xs text-gray-300">
+        {`Last updated on ${transaction.updatedAt.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })} at ${transaction.updatedAt.toLocaleTimeString('en-US')}`}
+      </p>
+
+      {/* <h2>Raw data:</h2>
+      <pre>{JSON.stringify(transaction, null, 4)}</pre> */}
     </>
   );
 };
