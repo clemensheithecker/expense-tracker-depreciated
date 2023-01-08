@@ -14,7 +14,7 @@ const TransactionPreviewItems = (props: {
   const { transactions } = props;
 
   return (
-    <ul>
+    <ul className="mt-6 overflow-hidden rounded-lg border">
       {transactions &&
         transactions.map((transaction) => (
           <li key={transaction.id}>
@@ -40,55 +40,79 @@ const AccountItem = (props: {
 
   return (
     <>
-      <h1>{account.name}</h1>
-      <p>
-        <em>{`Created on ${account.createdAt}`}</em>
-      </p>
-      <p>
-        <em>{`Last updated on ${account.updatedAt}`}</em>
+      <h1 className="mt-6 text-3xl font-bold text-gray-900">{account.name}</h1>
+      <p className="mt-1 text-sm font-semibold uppercase text-gray-300">
+        Account
       </p>
 
-      <dl>
-        <dt>Type: </dt>
-        <dd>{account.type?.name}</dd>
-      </dl>
-      <dl>
-        <dt>Current Balance: </dt>
-        <dd>
-          {account.currentBalance.toLocaleString(undefined, {
-            style: 'currency',
-            currency: account.currency,
-          })}
-        </dd>
-      </dl>
-      <dl>
-        <dt>Initial Balance: </dt>
-        <dd>
-          {account.initialBalance.toLocaleString(undefined, {
-            style: 'currency',
-            currency: account.currency,
-          })}
-        </dd>
-      </dl>
-      <dl>
-        <dt>Currency</dt>
-        <dd>{account.currency}</dd>
-      </dl>
-      <dl>
-        <dt>Number of Transactions: </dt>
-        <dd>{account.totalTransactions}</dd>
-      </dl>
+      <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3">
+        <dl className="">
+          <dt className="text-sm font-medium text-gray-500">Type</dt>
+          <dd className="mt-1 font-medium text-gray-900">
+            {account.type?.name}
+          </dd>
+        </dl>
+        <dl className="">
+          <dt className="text-sm font-medium text-gray-500">Current balance</dt>
+          <dd
+            className={`mt-1 font-medium text-gray-900 ${
+              account.currentBalance > 0
+                ? 'text-green-500'
+                : account.currentBalance < 0
+                ? 'text-red-500'
+                : 'text-gray-900'
+            }`}
+          >
+            {account.currentBalance.toLocaleString(undefined, {
+              style: 'currency',
+              currency: account.currency,
+            })}
+          </dd>
+        </dl>
+        {/* <dl className="">
+          <dt className="font-medium text-gray-500">Initial Balance</dt>
+          <dd className="mt-1 text-gray-900">
+            {account.initialBalance.toLocaleString(undefined, {
+              style: 'currency',
+              currency: account.currency,
+            })}
+          </dd>
+        </dl>
+        <dl className="">
+          <dt className="font-medium text-gray-500">Currency</dt>
+          <dd className="mt-1 text-gray-900">{account.currency}</dd>
+        </dl> */}
+        <dl className="">
+          <dt className="text-sm font-medium text-gray-500">
+            Total transactions
+          </dt>
+          <dd className="mt-1 font-medium text-gray-900">
+            {account.totalTransactions}
+          </dd>
+        </dl>
+      </div>
 
-      <h2>Transactions</h2>
-
-      <p>
-        <em>{`Last transaction on ${account.latestTransactionAt}`}</em>
-      </p>
+      <h2 className="mt-8 text-xl font-bold text-gray-900">Transactions</h2>
 
       <TransactionPreviewItems transactions={transactions} />
 
-      <h2>Raw data:</h2>
-      <pre>{JSON.stringify(account, null, 4)}</pre>
+      <p className="mt-8 text-xs text-gray-300">
+        {`Created on ${account.createdAt.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })} at ${account.createdAt.toLocaleTimeString('en-US')}`}
+      </p>
+      <p className="text-xs text-gray-300">
+        {`Last updated on ${account.updatedAt.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })} at ${account.updatedAt.toLocaleTimeString('en-US')}`}
+      </p>
+
+      {/* <h2>Raw data:</h2>
+      <pre>{JSON.stringify(account, null, 4)}</pre> */}
     </>
   );
 };
