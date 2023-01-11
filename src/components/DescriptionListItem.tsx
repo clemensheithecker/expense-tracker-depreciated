@@ -11,7 +11,7 @@ const DescriptionListItem = (props: {
   const { color = children ? 'neutral' : 'disabled' } = definitionProps || {};
 
   return (
-    <div className="mt-6 sm:grid sm:grid-cols-3 sm:gap-4">
+    <div className="mt-6 first:mt-0 sm:grid sm:grid-cols-3 sm:gap-4">
       <dt className="font-medium text-gray-500">{term}</dt>
       <dd
         className={`mt-1 sm:col-span-2 sm:mt-0 ${
