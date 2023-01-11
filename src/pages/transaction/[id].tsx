@@ -106,6 +106,20 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
       <dl className="mt-6 overflow-hidden rounded-lg border py-1">
         {transactionPropsListItems}
       </dl>
+      <div className="mt-4 flex justify-end">
+        <button
+          type="button"
+          className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 py-2 px-4 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          className="ml-2 inline-flex justify-center rounded-md border border-transparent bg-red-100 py-2 px-4 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+        >
+          Delete
+        </button>
+      </div>
       <div className="mt-8">
         <MetaDataFooter listItems={metaDataListItems} />
       </div>
