@@ -102,18 +102,6 @@ async function main() {
     },
     update: {},
   });
-
-  await prisma.post.upsert({
-    where: {
-      id: firstPostId,
-    },
-    create: {
-      id: firstPostId,
-      title: 'First Post',
-      text: 'This is an example post generated from `prisma/seed.ts`',
-    },
-    update: {},
-  });
 }
 
 main()
