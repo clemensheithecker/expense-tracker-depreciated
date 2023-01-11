@@ -4,6 +4,7 @@ import { inferProcedureInput } from '@trpc/server';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import AccountPreviewItem from '~/components/AccountPreviewItem';
+import PageHeader from '~/components/PageHeader';
 import type { AppRouter } from '~/server/routers/_app';
 
 const AccountsPage: NextPageWithLayout = () => {
@@ -11,7 +12,7 @@ const AccountsPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <h1 className="mt-6 text-3xl font-bold text-gray-900">Accounts</h1>
+      <PageHeader header="Accounts" />
 
       {accountsQuery.status === 'loading' && '(loading)'}
 

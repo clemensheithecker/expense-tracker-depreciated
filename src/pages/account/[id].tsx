@@ -4,6 +4,7 @@ import { NextPageWithLayout } from '../_app';
 import Link from 'next/link';
 import { RouterOutput, trpc } from '~/utils/trpc';
 import TransactionPreviewItem from '~/components/TransactionPreviewItem';
+import PageHeader from '~/components/PageHeader';
 
 type AccountByIdOutput = RouterOutput['account']['byId'];
 type TransactionByAccountIdOutput = RouterOutput['transaction']['byAccountId'];
@@ -40,10 +41,7 @@ const AccountItem = (props: {
 
   return (
     <>
-      <h1 className="mt-6 text-3xl font-bold text-gray-900">{account.name}</h1>
-      <p className="mt-1 text-sm font-semibold uppercase text-gray-300">
-        Account
-      </p>
+      <PageHeader header={account.name} subheader="Account" />
 
       <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3">
         <dl className="">

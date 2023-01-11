@@ -3,6 +3,7 @@ import { NextPageWithLayout } from './_app';
 import { inferProcedureInput } from '@trpc/server';
 import Link from 'next/link';
 import { Fragment } from 'react';
+import PageHeader from '~/components/PageHeader';
 import TransactionPreviewItem from '~/components/TransactionPreviewItem';
 import type { AppRouter } from '~/server/routers/_app';
 
@@ -11,7 +12,7 @@ const TransactionsPage: NextPageWithLayout = () => {
 
   return (
     <>
-      <h1 className="mt-6 text-3xl font-bold text-gray-900">Transactions</h1>
+      <PageHeader header="Transactions" />
 
       {transactionsQuery.status === 'loading' && '(loading)'}
 

@@ -1,6 +1,7 @@
 import NextError from 'next/error';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import PageHeader from '~/components/PageHeader';
 import { NextPageWithLayout } from '~/pages/_app';
 import { RouterOutput, trpc } from '~/utils/trpc';
 
@@ -11,12 +12,7 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
 
   return (
     <>
-      <h1 className="mt-6 text-3xl font-bold text-gray-900">
-        {transaction.name}
-      </h1>
-      <p className="mt-1 text-sm font-semibold uppercase text-gray-300">
-        Transaction
-      </p>
+      <PageHeader header={transaction.name} subheader="Transaction" />
 
       <ul className="mt-6">
         <li>
