@@ -36,7 +36,10 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
 
   const transactionPropsListItems = [
     <DescriptionListItem key="accountName" term={'Account'}>
-      <Link href={`/account/${transaction.account.id}`}>
+      <Link
+        href={`/account/${transaction.account.id}`}
+        className="rounded-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      >
         {transaction.account.name}
       </Link>
     </DescriptionListItem>,

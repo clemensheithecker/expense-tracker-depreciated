@@ -11,8 +11,8 @@ const TransactionPreviewItem = (props: {
   const { id, name, amount, category, timestamp, currency } = props;
 
   return (
-    <Link href={`/transaction/${id}`}>
-      <article className="flex flex-row items-center justify-between p-4 hover:bg-gray-50 focus:bg-gray-50">
+    <Link href={`/transaction/${id}`} className="group focus:outline-none">
+      <article className="flex flex-row items-center justify-between p-4 hover:bg-gray-50 group-focus:bg-gray-50 group-focus:ring-2 group-focus:ring-indigo-500 group-focus:ring-offset-2">
         <div>
           <h2 className="font-medium text-gray-900">{name}</h2>
           <p className="mt-1 text-xs text-gray-500">
