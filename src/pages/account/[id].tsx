@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { RouterOutput, trpc } from '~/utils/trpc';
 import TransactionPreviewItem from '~/components/TransactionPreviewItem';
 import PageHeader from '~/components/PageHeader';
+import MetaDataFooter from '~/components/MetaDataFooter';
 
 type AccountByIdOutput = RouterOutput['account']['byId'];
 type TransactionByAccountIdOutput = RouterOutput['transaction']['byAccountId'];
@@ -38,6 +39,27 @@ const AccountItem = (props: {
   transactions: TransactionByAccountIdOutput | undefined;
 }) => {
   const { account, transactions } = props;
+
+  const metaDataListItems = [
+    <li key="createdAt">
+      <p>
+        {`Created on ${account.createdAt.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })} at ${account.createdAt.toLocaleTimeString('en-US')}`}
+      </p>
+    </li>,
+    <li key="updatedAt">
+      <p>
+        {`Last updated on ${account.updatedAt.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })} at ${account.updatedAt.toLocaleTimeString('en-US')}`}
+      </p>
+    </li>,
+  ];
 
   return (
     <>
@@ -94,23 +116,9 @@ const AccountItem = (props: {
 
       <TransactionPreviewItems transactions={transactions} />
 
-      <p className="mt-8 text-xs text-gray-300">
-        {`Created on ${account.createdAt.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-        })} at ${account.createdAt.toLocaleTimeString('en-US')}`}
-      </p>
-      <p className="text-xs text-gray-300">
-        {`Last updated on ${account.updatedAt.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-        })} at ${account.updatedAt.toLocaleTimeString('en-US')}`}
-      </p>
-
-      {/* <h2>Raw data:</h2>
-      <pre>{JSON.stringify(account, null, 4)}</pre> */}
+      <div className="mt-8">
+        <MetaDataFooter listItems={metaDataListItems} />
+      </div>
     </>
   );
 };
