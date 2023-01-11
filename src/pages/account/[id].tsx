@@ -64,7 +64,6 @@ const AccountItem = (props: {
   return (
     <>
       <PageHeader header={account.name} subheader="Account" />
-
       <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3">
         <dl className="">
           <dt className="text-sm font-medium text-gray-500">Type</dt>
@@ -89,19 +88,6 @@ const AccountItem = (props: {
             })}
           </dd>
         </dl>
-        {/* <dl className="">
-          <dt className="font-medium text-gray-500">Initial Balance</dt>
-          <dd className="mt-1 text-gray-900">
-            {account.initialBalance.toLocaleString(undefined, {
-              style: 'currency',
-              currency: account.currency,
-            })}
-          </dd>
-        </dl>
-        <dl className="">
-          <dt className="font-medium text-gray-500">Currency</dt>
-          <dd className="mt-1 text-gray-900">{account.currency}</dd>
-        </dl> */}
         <dl className="">
           <dt className="text-sm font-medium text-gray-500">
             Total transactions
@@ -111,11 +97,8 @@ const AccountItem = (props: {
           </dd>
         </dl>
       </div>
-
       <h2 className="mt-8 text-xl font-bold text-gray-900">Transactions</h2>
-
       <TransactionPreviewItems transactions={transactions} />
-
       <div className="mt-8">
         <MetaDataFooter listItems={metaDataListItems} />
       </div>

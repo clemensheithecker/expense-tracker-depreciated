@@ -103,7 +103,9 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
   return (
     <>
       <PageHeader header={transaction.name} subheader="Transaction" />
-      <dl className="mt-6">{transactionPropsListItems}</dl>
+      <dl className="mt-6 overflow-hidden rounded-lg border py-1">
+        {transactionPropsListItems}
+      </dl>
       <div className="mt-8">
         <MetaDataFooter listItems={metaDataListItems} />
       </div>
