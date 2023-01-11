@@ -84,17 +84,6 @@ async function main() {
     update: {},
   });
 
-  // await prisma.account.update({
-  //   where: {
-  //     id: householdAccountId,
-  //   },
-  //   data: {
-  //     currentBalance: {
-  //       increment: 47.95,
-  //     },
-  //   },
-  // });
-
   await prisma.transaction.upsert({
     where: {
       id: secondTransactionId,
@@ -108,22 +97,11 @@ async function main() {
       involvedParty: 'Laundromat',
       timestamp: new Date('2023-01-07T14:29:00'),
       paymentMethodId: cashPaymentMethodId,
-      note: 'Bought bananas, apples, and milk',
-      tags: ['food', 'groceries'],
+      note: 'Picked up white dress shirt and pants',
+      tags: ['laundry', 'cleaning', 'clothes'],
     },
     update: {},
   });
-
-  // await prisma.account.update({
-  //   where: {
-  //     id: householdAccountId,
-  //   },
-  //   data: {
-  //     currentBalance: {
-  //       increment: 17.99,
-  //     },
-  //   },
-  // });
 
   await prisma.post.upsert({
     where: {
