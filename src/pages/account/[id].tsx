@@ -5,6 +5,7 @@ import { RouterOutput, trpc } from '~/utils/trpc';
 import TransactionPreviewItem from '~/components/TransactionPreviewItem';
 import PageHeader from '~/components/PageHeader';
 import MetaDataFooter from '~/components/MetaDataFooter';
+import StatsItem from '~/components/StatsItem';
 
 type AccountByIdOutput = RouterOutput['account']['byId'];
 type TransactionByAccountIdOutput = RouterOutput['transaction']['byAccountId'];
@@ -39,6 +40,34 @@ const AccountItem = (props: {
 }) => {
   const { account, transactions } = props;
 
+  const statsItems = [
+    <StatsItem
+      key="accountTypeName"
+      label="Type"
+      value={account.type?.name || '—'}
+    />,
+    <StatsItem
+      key="currentBalance"
+      label="Current balance"
+      value={account.currentBalance.toLocaleString('en-US', {
+        style: 'currency',
+        currency: account.currency,
+      })}
+      color={
+        account.currentBalance > 0
+          ? 'green'
+          : account.currentBalance < 0
+          ? 'red'
+          : undefined
+      }
+    />,
+    <StatsItem
+      key="totalTransactions"
+      label="Total transactions"
+      value={account.totalTransactions.toLocaleString('en-US')}
+    />,
+  ];
+
   const metaDataListItems = [
     <li key="createdAt">
       <p>
@@ -63,38 +92,8 @@ const AccountItem = (props: {
   return (
     <>
       <PageHeader header={account.name} subheader="Account" />
-      <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3">
-        <dl className="">
-          <dt className="text-sm font-medium text-gray-500">Type</dt>
-          <dd className="mt-1 font-medium text-gray-900">
-            {account.type?.name}
-          </dd>
-        </dl>
-        <dl className="">
-          <dt className="text-sm font-medium text-gray-500">Current balance</dt>
-          <dd
-            className={`mt-1 font-medium text-gray-900 ${
-              account.currentBalance > 0
-                ? 'text-green-500'
-                : account.currentBalance < 0
-                ? 'text-red-500'
-                : 'text-gray-900'
-            }`}
-          >
-            {account.currentBalance.toLocaleString(undefined, {
-              style: 'currency',
-              currency: account.currency,
-            })}
-          </dd>
-        </dl>
-        <dl className="">
-          <dt className="text-sm font-medium text-gray-500">
-            Total transactions
-          </dt>
-          <dd className="mt-1 font-medium text-gray-900">
-            {account.totalTransactions}
-          </dd>
-        </dl>
+      <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
+        {statsItems}
       </div>
       <div className="mt-8 flex items-center justify-between">
         <h2 className="text-xl font-bold text-gray-900">Transactions</h2>
