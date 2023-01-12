@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import DescriptionListItem from '~/components/DescriptionListItem';
 import MetaDataFooter from '~/components/MetaDataFooter';
 import PageHeader from '~/components/PageHeader';
-import TagListItem from '~/components/TagListItem';
+import { TagListItem } from '~/components/Tag';
 import { NextPageWithLayout } from '~/pages/_app';
 import { RouterOutput, trpc } from '~/utils/trpc';
 
@@ -96,7 +96,7 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
       {transaction.tags.length === 0 ? undefined : (
         <ul className="flex">
           {transaction.tags.map((tag, index) => (
-            <TagListItem key={index} tag={tag} />
+            <TagListItem key={index} text={tag} />
           ))}
         </ul>
       )}
