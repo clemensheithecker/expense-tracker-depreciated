@@ -1,7 +1,6 @@
 import NextError from 'next/error';
 import { useRouter } from 'next/router';
 import { NextPageWithLayout } from '../_app';
-import Link from 'next/link';
 import { RouterOutput, trpc } from '~/utils/trpc';
 import TransactionPreviewItem from '~/components/TransactionPreviewItem';
 import PageHeader from '~/components/PageHeader';
