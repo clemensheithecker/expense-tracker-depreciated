@@ -16,21 +16,23 @@ const TransactionPreviewItems = (props: {
   const { transactions } = props;
 
   return (
-    <ul className="mt-6 overflow-hidden rounded-lg border">
-      {transactions &&
-        transactions.map((transaction) => (
-          <li key={transaction.id}>
-            <TransactionPreviewItem
-              id={transaction.id}
-              name={transaction.name}
-              amount={transaction.amount}
-              category={{ name: transaction.category?.name }}
-              timestamp={transaction.timestamp}
-              currency={transaction.account.currency}
-            />
-          </li>
-        ))}
-    </ul>
+    <div className="mt-6">
+      <ul className="overflow-hidden rounded-lg border">
+        {transactions &&
+          transactions.map((transaction) => (
+            <li key={transaction.id}>
+              <TransactionPreviewItem
+                id={transaction.id}
+                name={transaction.name}
+                amount={transaction.amount}
+                category={{ name: transaction.category?.name }}
+                timestamp={transaction.timestamp}
+                currency={transaction.account.currency}
+              />
+            </li>
+          ))}
+      </ul>
+    </div>
   );
 };
 
