@@ -11,10 +11,10 @@ const DescriptionListItem = (props: {
   const { color = children ? 'neutral' : 'disabled' } = definitionProps || {};
 
   return (
-    <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-      <dt className="font-medium text-gray-500">{term}</dt>
+    <div className="px-4 py-5 odd:bg-gray-50 even:bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt className="text-sm font-medium text-gray-500">{term}</dt>
       <dd
-        className={`mt-1 sm:col-span-2 sm:mt-0 ${
+        className={`mt-1 text-sm sm:col-span-2 sm:mt-0 ${
           color === 'green'
             ? 'text-green-500'
             : color === 'red'

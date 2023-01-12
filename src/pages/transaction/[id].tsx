@@ -105,23 +105,37 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
 
   return (
     <>
-      <PageHeader header={transaction.name} subheader="Transaction" />
-      <dl className="mt-6 overflow-hidden rounded-lg border py-1">
-        {transactionPropsListItems}
-      </dl>
-      <div className="mt-4 flex justify-end">
-        <button
-          type="button"
-          className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 py-2 px-4 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >
-          Edit
-        </button>
-        <button
-          type="button"
-          className="ml-2 inline-flex justify-center rounded-md border border-transparent bg-red-100 py-2 px-4 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-        >
-          Delete
-        </button>
+      <PageHeader header="Transaction" />
+      <div className="mt-6 overflow-hidden rounded-lg border bg-white shadow-sm">
+        <div className="px-4 py-5 sm:px-6">
+          <h3 className="text-lg font-medium leading-6 text-gray-900">
+            {transaction.name}
+          </h3>
+          <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            {`${
+              transaction.amount > 0
+                ? 'From '
+                : transaction.amount < 0
+                ? 'To '
+                : ''
+            }${transaction.involvedParty}`}
+          </p>
+        </div>
+        <dl className="border-t">{transactionPropsListItems}</dl>
+        <div className="flex justify-end border-t px-4 py-5 sm:px-6">
+          <button
+            type="button"
+            className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 py-2 px-4 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            className="ml-2 inline-flex justify-center rounded-md border border-transparent bg-red-100 py-2 px-4 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          >
+            Delete
+          </button>
+        </div>
       </div>
       <div className="mt-8">
         <MetaDataFooter listItems={metaDataListItems} />
