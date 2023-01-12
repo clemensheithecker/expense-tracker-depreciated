@@ -40,32 +40,38 @@ const AccountItem = (props: {
 }) => {
   const { account, transactions } = props;
 
-  const statsItems = [
-    <StatsItem
-      key="accountTypeName"
-      label="Type"
-      value={account.type?.name || '—'}
-    />,
-    <StatsItem
-      key="currentBalance"
-      label="Current balance"
-      value={account.currentBalance.toLocaleString('en-US', {
+  type StatsItem = {
+    key: string;
+    label: string;
+    value: string;
+    color?: 'green' | 'red' | undefined;
+  };
+
+  const statsItems: StatsItem[] = [
+    {
+      key: 'accountTypeName',
+      label: 'Type',
+      value: account.type?.name || '—',
+    },
+    {
+      key: 'currentBalance',
+      label: 'Current balance',
+      value: account.currentBalance.toLocaleString('en-US', {
         style: 'currency',
         currency: account.currency,
-      })}
-      color={
+      }),
+      color:
         account.currentBalance > 0
           ? 'green'
           : account.currentBalance < 0
           ? 'red'
-          : undefined
-      }
-    />,
-    <StatsItem
-      key="totalTransactions"
-      label="Total transactions"
-      value={account.totalTransactions.toLocaleString('en-US')}
-    />,
+          : undefined,
+    },
+    {
+      key: 'totalTransactions',
+      label: 'Total transactions',
+      value: account.totalTransactions.toLocaleString('en-US'),
+    },
   ];
 
   const metaDataListItems = [
@@ -93,7 +99,14 @@ const AccountItem = (props: {
     <>
       <PageHeader header={account.name} subheader="Account" />
       <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
-        {statsItems}
+        {statsItems.map((statsItem) => (
+          <StatsItem
+            key={statsItem.key}
+            label={statsItem.label}
+            value={statsItem.value}
+            color={statsItem.color}
+          />
+        ))}
       </div>
       <div className="mt-8 flex items-center justify-between">
         <h2 className="text-xl font-bold text-gray-900">Transactions</h2>
