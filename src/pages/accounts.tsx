@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import AccountPreviewItem from '~/components/AccountPreviewItem';
 import PageHeader from '~/components/PageHeader';
+import PreviewItemList from '~/components/PreviewItemList';
 import type { AppRouter } from '~/server/routers/_app';
 
 const AccountsPage: NextPageWithLayout = () => {
@@ -16,41 +17,24 @@ const AccountsPage: NextPageWithLayout = () => {
 
       {accountsQuery.status === 'loading' && '(loading)'}
 
-      <ul className="mt-6 overflow-hidden rounded-lg border">
-        {accountsQuery.data?.map((account) => (
-          <li key={account.id}>
-            <AccountPreviewItem
-              id={account.id}
-              name={account.name}
-              type={{ name: account.type?.name }}
-              currentBalance={account.currentBalance}
-              currency={account.currency}
-              totalTransactions={account.totalTransactions}
-            />
-            {/* <article>
-              <h2>{account.name}</h2>
-              <dl>
-                <dt>Type: </dt>
-                <dd>{account.type?.name}</dd>
-              </dl>
-              <dl>
-                <dt>Balance: </dt>
-                <dd>
-                  {account.currentBalance.toLocaleString(undefined, {
-                    style: 'currency',
-                    currency: account.currency,
-                  })}
-                </dd>
-              </dl>
-              <dl>
-                <dt>Number of Transactions: </dt>
-                <dd>{account.totalTransactions}</dd>
-              </dl>
-              <Link href={`/account/${account.id}`}>Account page</Link>
-            </article> */}
-          </li>
-        ))}
-      </ul>
+      <div className="mt-8">
+        <PreviewItemList>
+          <>
+            {accountsQuery.data?.map((account) => (
+              <li key={account.id}>
+                <AccountPreviewItem
+                  id={account.id}
+                  name={account.name}
+                  type={{ name: account.type?.name }}
+                  currentBalance={account.currentBalance}
+                  currency={account.currency}
+                  totalTransactions={account.totalTransactions}
+                />
+              </li>
+            ))}
+          </>
+        </PreviewItemList>
+      </div>
     </>
   );
 };

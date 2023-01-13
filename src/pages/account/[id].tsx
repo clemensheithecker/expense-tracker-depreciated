@@ -6,6 +6,7 @@ import TransactionPreviewItem from '~/components/TransactionPreviewItem';
 import PageHeader from '~/components/PageHeader';
 import MetaDataFooter from '~/components/MetaDataFooter';
 import StatsItem from '~/components/StatsItem';
+import PreviewItemList from '~/components/PreviewItemList';
 
 type AccountByIdOutput = RouterOutput['account']['byId'];
 type TransactionByAccountIdOutput = RouterOutput['transaction']['byAccountId'];
@@ -16,22 +17,24 @@ const TransactionPreviewItems = (props: {
   const { transactions } = props;
 
   return (
-    <div className="mt-6">
-      <ul className="overflow-hidden rounded-lg border">
-        {transactions &&
-          transactions.map((transaction) => (
-            <li key={transaction.id}>
-              <TransactionPreviewItem
-                id={transaction.id}
-                name={transaction.name}
-                amount={transaction.amount}
-                category={{ name: transaction.category?.name }}
-                timestamp={transaction.timestamp}
-                currency={transaction.account.currency}
-              />
-            </li>
-          ))}
-      </ul>
+    <div className="mt-4">
+      <PreviewItemList>
+        <>
+          {transactions &&
+            transactions.map((transaction) => (
+              <li key={transaction.id}>
+                <TransactionPreviewItem
+                  id={transaction.id}
+                  name={transaction.name}
+                  amount={transaction.amount}
+                  category={{ name: transaction.category?.name }}
+                  timestamp={transaction.timestamp}
+                  currency={transaction.account.currency}
+                />
+              </li>
+            ))}
+        </>
+      </PreviewItemList>
     </div>
   );
 };
