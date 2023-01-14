@@ -38,7 +38,7 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
     <DescriptionListItem key="accountName" term={'Account'}>
       <Link
         href={`/account/${transaction.account.id}`}
-        className="rounded-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        className="rounded-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900"
       >
         {transaction.account.name}
       </Link>
@@ -125,7 +125,7 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
         <div className="flex justify-end border-t border-gray-200 px-4 py-5 dark:border-gray-800 sm:px-6">
           <button
             type="button"
-            className="inline-flex items-center rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:hover:bg-gray-800"
+            className="inline-flex items-center rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-white dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:hover:bg-gray-800 dark:focus:ring-offset-gray-900"
           >
             <svg
               className="-ml-1 mr-2 h-5 w-5 text-gray-500 dark:text-gray-400"
@@ -140,7 +140,7 @@ const TransactionItem = (props: { transaction: TransactionByIdOutput }) => {
           </button>
           <button
             type="button"
-            className="ml-2 inline-flex justify-center rounded-md border border-transparent bg-red-100 py-2 px-4 text-sm font-medium text-red-700 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:bg-red-700 dark:text-red-100 dark:hover:bg-red-600"
+            className="ml-2 inline-flex justify-center rounded-md border border-transparent bg-red-100 py-2 px-4 text-sm font-medium text-red-700 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white dark:bg-red-700 dark:text-red-100 dark:hover:bg-red-600 dark:focus:ring-offset-gray-900"
           >
             <svg
               className="-ml-1 mr-2 h-5 w-5 text-inherit"
