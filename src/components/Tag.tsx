@@ -2,7 +2,7 @@ const Tag = (props: { text: string }) => {
   const { text } = props;
 
   return (
-    <span className="rounded-md bg-gray-100 px-2 py-1 text-gray-900">
+    <span className="rounded-md bg-gray-100 px-2 py-1 dark:bg-gray-700">
       {text}
     </span>
   );

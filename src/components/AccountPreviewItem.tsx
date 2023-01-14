@@ -13,8 +13,8 @@ const AccountPreviewItem = (props: {
   return (
     <PreviewItem href={`/account/${id}`}>
       <div>
-        <h2 className="font-medium text-gray-900">{name}</h2>
-        <p className="mt-1 text-xs text-gray-500">
+        <h2 className="font-medium">{name}</h2>
+        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
           {type.name !== undefined && <span className="mr-2">{type.name}</span>}
           <span>
             {totalTransactions.toLocaleString('en-US') +
@@ -25,10 +25,10 @@ const AccountPreviewItem = (props: {
       <p
         className={`font-medium ${
           currentBalance > 0
-            ? 'text-green-500'
+            ? ''
             : currentBalance < 0
             ? 'text-red-500'
-            : 'text-gray-900'
+            : 'text-inherit'
         }`}
       >
         {currentBalance.toLocaleString('en-US', {

@@ -13,8 +13,8 @@ const TransactionPreviewItem = (props: {
   return (
     <PreviewItem href={`/transaction/${id}`}>
       <div>
-        <h3 className="font-medium text-gray-900">{name}</h3>
-        <p className="mt-1 text-xs text-gray-500">
+        <h3 className="font-medium">{name}</h3>
+        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
           <span>
             {timestamp.toLocaleDateString('en-US', {
               year: 'numeric',
@@ -33,7 +33,7 @@ const TransactionPreviewItem = (props: {
             ? 'text-green-500'
             : amount < 0
             ? 'text-red-500'
-            : 'text-gray-900'
+            : 'text-inherit'
         }`}
       >
         {amount.toLocaleString('en-US', {
